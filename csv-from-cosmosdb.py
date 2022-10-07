@@ -43,25 +43,6 @@ cluster = Cluster([cfg.config['contactPoint']], port = cfg.config['port'], auth_
 session = cluster.connect()
 #</authenticateAndConnect>
 
-#<createKeyspace>
-print ("\nCreating Keyspace")
-session.execute('CREATE KEYSPACE IF NOT EXISTS uprofile WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter\' : \'1\' }');
-#</createKeyspace>
-
-#<createTable>
-print ("\nCreating Table")
-session.execute('CREATE TABLE IF NOT EXISTS uprofile.user (user_id int PRIMARY KEY, user_name text, user_bcity text)');
-#</createTable>
-
-#<insertData>
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [1,'Lybkov','Seattle'])
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [2,'Doniv','Dubai'])
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [3,'Keviv','Chennai'])
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [4,'Ehtevs','Pune'])
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [5,'Dnivog','Belgaum'])
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [6,'Ateegk','Narewadi'])
-session.execute("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (%s,%s,%s)", [7,'KannabbuS','Yamkanmardi'])
-#</insertData>
 
 #<queryAllItems>
 print ("\nSelecting All")
@@ -69,5 +50,10 @@ rows = session.execute('SELECT * FROM uprofile.user')
 PrintTable(rows)
 #</queryAllItems>
 
+#<queryByID>
+# print ("\nSelecting Id=1")
+# rows = session.execute('SELECT * FROM uprofile.user where user_id=1')
+# PrintTable(rows)
+#</queryByID>
 
 cluster.shutdown()
